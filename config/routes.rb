@@ -8,7 +8,8 @@ SkinnystorkSignup::Application.routes.draw do
   
   namespace :admin do
     root "base#index"
-    resources :users
+    resources :users  
+    resources :user_steps
   end
   
 end

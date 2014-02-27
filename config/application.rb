@@ -22,7 +22,7 @@ module SkinnystorkSignup
     
     # turn off warnings triggered by friendly_id
     I18n.enforce_available_locales = false
-    
+    config.stripe.publishable_key = 'pk_test_OmLMBziRCzv3a6hxMFAZHmF1'
     # Test framework
     config.generators.test_framework false
     

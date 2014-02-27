@@ -25,6 +25,14 @@
     <th>Created At</th>
     <th>Last Sign In</th>
     <th>Last Sign In IP</th>
+    <th>Lose Fat and Tone</th>
+    <th>Better my Endurance</th>
+    <th>Get Stronger</th>
+    <th>Connect my mind and body</th>
+    <th>Eat better</th>
+    <th>Pregnant</th>
+    <th>Birthday</th>
+      
   </tr>
   
   <% @users.each do |user| %>
@@ -43,6 +51,13 @@
     <td>never</td>
     <% end %>
     <td><%= user.last_sign_in_ip %></td>
+      <td><%= user.lose_fat_and_tone %></td>
+      <td><%= user.better_my_endurance %></td>
+      <td><%= user.get_stronger %></td>
+      <td><%= user.connect_my_mind_and_body %></td>
+      <td><%= user.eat_better %></td>
+      <td><%= user.currently_pregnant %></td>
+      <td><%= user.birthday %></td>
   </tr>
   
   <% end %>

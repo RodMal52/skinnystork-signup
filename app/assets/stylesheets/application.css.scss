@@ -1,7 +1,9 @@
 /*
  * Overwritten by RailsBricks
- *
+ *= require_signup
  *= require_self
+ *= require_style
  */
 @import "framework_and_overrides";
+@import "signup";
 

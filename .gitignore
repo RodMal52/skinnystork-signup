@@ -28,3 +28,8 @@ doc/
 # Ignore application configuration
 /config/application.yml
 .secret
+
+/config/database.yml
+.DS_Store
+/log/*
+/tmp/*

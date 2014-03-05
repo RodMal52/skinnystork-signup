@@ -21,7 +21,11 @@ end
 group :development, :test do
   gem 'sqlite3', '~> 1.3.8'    # dev & test database
   gem 'figaro', '~> 0.7.0'     # env variables
+  
 end
+
+
+gem 'mina'
 
 # Paging
 gem 'kaminari', '~> 0.15.0'

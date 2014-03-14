@@ -5,11 +5,14 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :reject_locked!, if: :devise_controller?
   
-
+ protected
+     
   # Devise permitted params
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
-      :username, 
+      :username,
+      :stripe_token,
+      :coupon,
       :email, 
       :password, 
       :password_confirmation,
@@ -75,7 +78,9 @@ class ApplicationController < ActionController::Base
      :billing_phone ) 
     }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
-      :username, 
+      :username,
+      :stripe_token,
+      :coupon,
       :email, 
       :password, 
       :password_confirmation,
@@ -83,10 +88,25 @@ class ApplicationController < ActionController::Base
       ) 
     }
   end
-  
+
   # Redirects on successful sign in
-  def after_sign_in_path_for(resource)
-    inside_path
+  def after_sign_in_path_for(resource) 
+      case current_user.roles.first.name
+        when 'admin' 
+          users_path
+        when 'bold_moves'
+          content_bold_moves_path
+        when 'fusion'
+          content_fusion_path
+        when 'fit_lifestyle'
+          content_fit_lifestyle_path
+        else
+          root_path
+      end 
+  end
+        
+  def after_sign_up_path_for(resource)
+      inside_path
   end
   
   # Auto-sign out locked users

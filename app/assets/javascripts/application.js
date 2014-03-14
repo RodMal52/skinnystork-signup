@@ -11,8 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require formToWizard
 //= require jquery_ujs
+//= require jquery.readyselector
+//= require jquery.externalscript
 //= require turbolinks
 //= require bootstrap
-//= require_tree .
+//= require registrations
+

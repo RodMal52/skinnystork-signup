@@ -39,7 +39,7 @@ class AddLoseFatAndToneToUser < ActiveRecord::Migration
     add_column :users, :state, :string
     add_column :users, :zip, :integer
     add_column :users, :country, :string
-    add_column :users, :reg_phone, :tel
+    add_column :users, :reg_phone, :string
     add_column :users, :plan_1_monthly, :boolean
     add_column :users, :plan_1_trimonthly, :boolean
     add_column :users, :plan_2_monthly, :boolean

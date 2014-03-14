@@ -13,4 +13,3 @@ u.skip_confirmation!
 u.save!
 
 
-

@@ -1,8 +1,28 @@
 <% title("Skinnystork - The MOMshell has arrived") %>
-<div id="welcome" class="hero-unit span7">
-   <h1>Skinnystork</h1>
-   <p> Currently under development</p>
-    
-    <p>Expect it really soon!</p>
-<div class='btn btn-primary'></div></div>
+
+ <div id="welcome" class="hero-unit span7">
+   
+ </div>
+ <div class="row span8 plans">
+   <div class="span2 well">
+     <div class="plan"><h2>The Bold Moves</h2></div>
+     <ul class="unstyled">
+       <li>Description</li>
+     </ul>
+     <h3>$119/month</h3>
+<%= link_to 'Subscribe', new_user_registration_path(:plan => 'bold_moves'), :class => 'btn btn-primary' %> </div>
+   <div class="span2 well featured">
+     <div class="plan featured-plan"><h2>The 360 Fusion</h2></div>
+     <ul class="unstyled">
+       <li>Description</li>
+     </ul>
+     <h3>$149/month</h3>
+<%= link_to 'Subscribe', new_user_registration_path(:plan => 'fusion'), :class => 'btn btn-primary' %> </div>
+   <div class="span2 well">
+     <div class="plan"><h2>The Fit Lifestyle</h2></div>
+     <ul class="unstyled">
+       <li>Description</li>
+     </ul>
+     <h3>$199/month</h3>
+<%= link_to 'Subscribe', new_user_registration_path(:plan => 'fit_lifestyle'), :class => 'btn btn-primary' %> </div>
 </div>

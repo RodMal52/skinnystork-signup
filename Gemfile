@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.3'
 gem 'sass-rails', '~> 4.0.1'
 gem 'uglifier', '~> 2.4.0'
 gem 'coffee-rails', '~> 4.0.1'
@@ -12,7 +12,11 @@ gem 'simple_form'
 gem 'gravtastic'
 gem 'wicked'
 gem 'carmen-rails', '~> 1.0.0', github: 'jim/carmen-rails'
-gem 'stripe-rails'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe_event'
+gem 'cancan'
+gem 'rolify'
+
 group :doc do
   gem 'sdoc', require: false
 end

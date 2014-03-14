@@ -1,389 +1,55 @@
 <link href='http://fonts.googleapis.com/css?family=Questrial|Anton' rel='stylesheet' type='text/css'>
 <%= stylesheet_link_tag "signup" %>
-<%= javascript_include_tag "formToWizard"%>
-
-<script type="text/javascript">
-        $(document).ready(function(){
-            $("#SignupForm").formToWizard({ submitButton: 'SaveAccount' })
-        });
-    </script>
-
+<% content_for :head do %>
+<%= tag :meta, :name => "stripe-key", :content => ENV['STRIPE_PUBLIC_KEY'] %>
+<% end %>
+<div id="stripe_error" class="alert alert-error" style="display:none" ></div>
  <div class="brick_texture"></div>
 <div class="transparent_top_box"></div>
 <form id="SignupForm" action="">
-<fieldset>
+
   <div class="row">
   <div class="col-sm-6">
-    <p class="signup1_title_txt">WELCOME TO SKINNYSTORK</p>
-      <p class="signup1_subtitle_txt">We would be happy to know more about your needs & goals</p>
-     
+      <p class="signup1_title_txt">SAY HELLO TO YOUR NEW, AWESOME BODY.</p>
+      <p class="signup1_subtitle_txt">Create your SkinnyStork Account</p>
       <div class="signup1_sec1_right_line"></div>
-      <div class="about_you"></div>
-      <a href="#" id="step0Next" class="next"><div class="account_btn"></div></a>
       <div class="signup1_sec1_left_line"></div>
-    <%= form_for(resource, :as => resource_name, 
-    :url => registration_path(resource_name), 
-    :html => { :role => "form" }) do |f| %>
-    
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "card_form form-vertical" }) do |f| %>
+      <h3><%= params[:plan].titleize if params[:plan] %> </h3> 
+      <%= hidden_field_tag 'plan', params[:plan] %>
       <%= devise_error_messages! %>
-    
-      <h2 class="signup1_sec1_title_txt">Where are you and where do you want to be?</h2>
-      <h3 class="signup1_sec1_question1">1.- RATE EACH GOAL IMPORTANCE TO YOU: </h3>
-      <div class="form-group">
-        <%= f.label :lose_fat_and_tone, :class=>"signup1_sec1_q1_option1"%>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[lose_fat_and_tone]" required class="signup1_sec1_q1_dropdown1">
-                <option></option>
-                <option value="1">Very Important</option>
-                <option value="2">Important</option>
-                <option value="3">Moderately important</option>
-                <option value="4">Not very important</option>
-                <option value="5">Unimportant</option>
-              </select> 
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :better_my_endurance, :class=>"signup1_sec1_q1_option2" %>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[better_my_endurance]" required class="signup1_sec1_q1_dropdown2">
-                <option></option>
-  <option value="1">Very Important</option>
-                <option value="2">Important</option>
-                <option value="3">Moderately important</option>
-                <option value="4">Not very important</option>
-                <option value="5">Unimportant</option>
-</select> 
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :get_stronger, :class=>"signup1_sec1_q1_option3" %>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[get_stronger]" required class="signup1_sec1_q1_dropdown3">
-                <option></option>
-  <option value="1">Very Important</option>
-                <option value="2">Important</option>
-                <option value="3">Moderately important</option>
-                <option value="4">Not very important</option>
-                <option value="5">Unimportant</option>
-</select>   
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :connect_my_mind_and_body, :class=>"signup1_sec1_q1_option4"  %>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[connect_my_mind_and_body]" required class="signup1_sec1_q1_dropdown4">
-                <option></option>
-  <option value="1">Very Important</option>
-                <option value="2">Important</option>
-                <option value="3">Moderately important</option>
-                <option value="4">Not very important</option>
-                <option value="5">Unimportant</option>
-</select>   
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :eat_better , :class=>"signup1_sec1_q1_option5"  %>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[eat_better]" required class="signup1_sec1_q1_dropdown5">
-                <option></option>
-  <option value="1">Very Important</option>
-                <option value="2">Important</option>
-                <option value="3">Moderately important</option>
-                <option value="4">Not very important</option>
-                <option value="5">Unimportant</option>
-</select>   
-          </div>
-        </div>
-      </div>
-      
-   <h3 class ="signup1_sec1_question2">2.- WHAT'S YOUR WEIGHT, HEIGHT & BIRTHDAY? </h3>   
-      <div class="form-group">
-        <%= f.label :weight, :class => "signup1_sec1_q2_option2" %>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.text_field :weight,  class: "form-control", :class =>"signup1_sec1_q2_dropdown2" %>  
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :units , :class => "signup1_sec1_q2_option1"%>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[units]" required class="signup1_sec1_q2_dropdown1 ">
-  
-<option></option>                <option>Pounds</option>
-  <option>Kilograms</option>
-</select>   
-          </div>
-        </div>
-      </div>
-      
-       <div class="form-group">
-        <%= f.label :height , :class => "signup1_sec1_q2_option3" %>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.text_field :height,  class: "form-control", :class =>"signup1_sec1_q2_dropdown3" %>  
-          </div>
-        </div>
-      </div>
-      
-       <div class="form-group">
-        <h5 class="signup1_sec1_q2_option4"> Birthday</h5>
-        <span class=" signup1_sec1_q2_dropdown4"><%= f.date_select(:birthday,{:order => [ :month,:day, :year], :start_year => 1951, :end_year => 2014})%></span>
-      </div>
-      
-      <div class="sec2_bkgd_box"></div>
-      
-       <h2 class="Medical_Information">Medical Information</h2>
-      <div class="signup1_sec2_rigth_line"></div>
-       <div class="signup1_sec2_left_line"></div>
-      
-      <div class="form-group">
-        <h5 class="signup1_sec2_question1">1.- DO YOU HAVE YOUR DOCTOR'S CLEARANCE FOR FULL EXCERCISE?</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[doctor_clearance]" required class="signup1_sec2_q1_fillin">
-                <option></option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select> 
-        </div>
-    </div>
-   </div>
-      
-      
-               <div class="form-group">
-        <h5 class="signup1_sec2_question2 ">2.- ARE YOU CURRENTLY PREGNANT?</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[currently_pregnant]" required class="signup1_sec2_q2_fillin">
-                <option></option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>   
-            </div>
-        </div>
-      </div>
-      
-<% if @user.currently_pregnant == "true"%>
-   <div class="form-group">
-        <h5>Congrats! How many weeks along are you?</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[doctor_clearance]">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select> 
-        </div>
-    </div>
-   </div>
-<% end %>
-      
-      
-      
-      
-      <div class="form-group">
-        <h5 class="signup1_sec2_question3">3.- DO YOU HAVE OR YOU EVER HAD ANY OF THE FOLLOWING?</h5>
-        <div class="row">
-          <div class="col-sm-6">
-         </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :heart_condition, :class => "hearth_select_box"%>
-              <%= f.label :heart_condition, :class =>"Heart_condition" %> 
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :head_injury_epilepsy, :class => "head_injury_epilepsy_box"%>
-                <h5 class= "head_injury_epilepsy">Head injury or epilepsy</h5>
-          </div>
-        </div>
-          
+      <div class="form-group">  
+          <h5 class="signup2_sec1_question1">FIRST NAME</h5>
           <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :shortness_breath, :class=>"shortness_breath_box"%>
-              <h5 class="shortness_breath">Shortness of breath at rest or mild physical activity</h5>
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :hepatitis, :class=>"hepatitis_box"%>
-                <%= f.label :hepatitis, :class=>"hepatitis"%>
+              <div class="col-sm-6">
+                  <%= f.text_field :first_name,  :autofocus =>true, :required => true, :class=>"signup2_sec1_q1_fillin" %>  
+              </div>
           </div>
-        </div>
-          
-        <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :unusual_fatigue, :class=>"unusual_fatigue_box"%>
-              <h5 class="unusual_fatigue">Unusual fatigue or dizziness during usual day activities</h5>
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :arthritis, :class=>"arthritis_box"%>
-                 <h5 class="arthritis">Arthritis</h5>
-          </div>
-        </div>
-          
-        <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :coronary_heart_disease, :class=>"coronary_heart_disease_box"%>
-              <h5 class="coronary_heart_disease">Coronary heart disease, heart attack, coronary artery surgery</h5>
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :chronic_severe_headaches, :class=>:chronic_severe_headaches_box%>
-                <h5 class="chronic_severe_headaches">Chronic and severe headaches</h5>
-          </div>
-        </div>
-          
-    
-        <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :high_pressure, :class=>"high_blood_pressure_box"%>
-              <h5 class="high_blood_pressure">High blood pressure</h5>
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :anemia, :class=>"anemia_box"%>
-                <h5 class="anemia">Anemia</h5>
-          </div>
-        </div>
-        
-         <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :stroke, :class=>"stroke_box"%>
-              <h5 class="stroke">Stroke</h5>
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :liver_problems, :class=>"liver_problems_box"%>
-               <h5 class="liver_problems">Liver problems</h5>
-          </div>
-        </div>
-          
-          <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :diabetes, :class=>"diabetes_box"%>
-              <h5 class="diabetes">Diabetes</h5>
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :lung_problems, :class=>"lung_problems_box"%>
-                <h5 class="lung_problems">Lung problems</h5>
-          </div>
-        </div>
-        
-          
-        <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :thyroid_problems, :class=>"thyroid_problems_box"%>
-              <h5 class="thyroid_problems">Thyroid problems</h5>
-               </div>
-          <div class="col-sm-6">
-                <%= f.check_box :others, :class=>"others_box"%>
-                <h5 class="others">Others</h5>
-          </div>
-        </div>
-          
-          <div class="row">
-          <div class="col-sm-6"> 
-              <%= f.check_box :no, :class=>"no_box"%>
-              <h5 class="no">No</h5>
-               </div>
-        </div>
-      </div>
-           
-    <h2 class="signup1_sec3_title">Other details</h2>
-      <div class="signup1_sec3_right_line"></div>
-      <div class="signup1_sec3_left_line"></div>
-      <div class="form-group">
-        <h5 class="signup1_sec3_question1">1.- Which time window is best for your trainer to call?</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[contact_time_window]" required class="signup1_sec3_q1_dropdown ">
-                <option></option>
-                <option>Morning (8-11am)</option>
-                <option>Afternoon (12-5pm)</option>
-                <option>Evening (5-8pm)</option>
-            </select>  
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <h5 class="signup1_sec3_question2">2.- What phone number should your trainer call?</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.telephone_field :contact_phone_number,  class: "form-control", :class=>"signup1_sec3_q2_dropdown" %> 
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <h5 class="signup1_sec3_question3">3.- Do you own a Roku?</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <select name="user[own_roku] " required class="signup1_sec3_q3_dropdown">
-                <option></option>
-                <option>Yes</option>
-                <option>No</option>
-            </select>  
-          </div>
-        </div>
-      </div>
-      
-      <a href="#" id="step0Next" class="next"><div class="signup1_continue_button_png"></div></a>
-</fieldset>
-<fieldset>
-    <p class="signup2_title_txt">JOIN THE FLOCK</p>
-      <p class="signup2_subtitle_txt">Discover what it feels like to become a SkinnyStork Member</p>
-    
-      <div class="signup2_sec1_right_line"></div>
-      <div class="account_btn"></div>
-      <div class="signup2_sec1_left_line"></div>
-    
-      <h2 class="signup2_sec1_title_txt">Create your SkinnyStork Account</h2> 
-      
-       <div class="form-group">
-        <h5 class="signup2_sec1_question1">FIRST NAME</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.text_field :first_name,  class: "form-control", :class=>"signup2_sec1_q1_fillin" %>  
-          </div>
-        </div>
       </div>
       
       <div class="form-group">
         <h5 class="signup2_sec1_question2">LAST NAME</h5>
         <div class="row">
           <div class="col-sm-6">
-            <%= f.text_field :last_name,  class: "form-control" , :class=>"signup2_sec1_q2_fillin" %> >  
+            <%= f.text_field :last_name,  :required => true , :class=>"signup2_sec1_q2_fillin" %> 
           </div>
         </div>
       </div>
       
       <div class="form-group">
-        <h5 class="signup2_sec1_question3">USERNAME</h5>
+        <h5 class="signup2_sec1_question3"> PICK A USERNAME</h5>
         <div class="row">
           <div class="col-sm-6">
-            <%= f.text_field :username,  class: "form-control" , :class=>"signup2_sec1_q3_fillin" %>   
+            <%= f.text_field :username,  :required => true , :class=>"signup2_sec1_q3_fillin" %>   
           </div>
         </div>
       </div>
     
       <div class="form-group">
-        <h5 class="signup2_sec1_question4">EMAIL</h5>
+        <h5 class="signup2_sec1_question4">E-MAIL ADDRESS</h5>
         <div class="row">
           <div class="col-sm-6">      
-            <%= f.email_field :email, class: "form-control" , :class=>"signup2_sec1_q4_fillin" %>  
+            <%= f.email_field :email, :required => true , :class=>"signup2_sec1_q4_fillin" %>  
           </div>
         </div>
       </div>
@@ -392,7 +58,7 @@
         <div class="row">
           <div class="col-sm-6">
            <h5 class="signup2_sec1_question5">PASSWORD</h5>
-            <%= f.password_field :password, class: "form-control", :class=>"signup2_sec1_q5_fillin" %> 
+            <%= f.password_field :password, :required => true, :class=>"signup2_sec1_q5_fillin" %> 
           </div>
         </div>
       </div>
@@ -401,72 +67,43 @@
         <div class="row">
           <div class="col-sm-6">
              <h5 class="signup2_sec1_question6">PASSWORD CONFIRMATION</h5>
-            <%= f.password_field :password_confirmation, class: "form-control" , :class=>"signup2_sec1_q6_fillin" %> 
+              <%= f.password_field :password_confirmation, :required => true, :class=>"signup2_sec1_q6_fillin" %> 
           </div>
         </div>
       </div>
-    </fieldset>
-      <fieldset>
-      
-      <h2>Where to send your equipment?</h2> 
-      <h4>This address can be different from your billing address
-
-</h4>
-      
-       <div class="form-group">
-        <%= f.label :address_line_1 %>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.text_field :address_line_1,  class: "form-control" %>  
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :address_line_2 %>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.text_field :address_line_2,  class: "form-control" %>  
-          </div>
-        </div>
-      </div>
-      
-      
-      <div class="form-group">
-        <%= f.label :city%>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.text_field :city,  class: "form-control" %>  
-          </div>
-        </div>
-      </div>
-      
-      
-       <div class="form-group">
-        <%= f.label :country%>
-        <div class="row">
-          <div class="col-sm-6">
-        
-        </div>
-      </div>
-     
-      
-      
-
+     <div class="signup3_sec3_right_line"></div>
+     <div class="signup3_sec3_left_line"></div> 
+     <h2 class="signup3_sec3_title">Payment</h2>
       <div class="row">
-        <div class="col-sm-6">
-          <%= f.submit "Sign up", class: "btn btn-primary", :id=>"SaveAccount" %>
-        </div>
-      </div>    
+          <div class="payment">
+              <div class="col-sm-6" >
+                  <% if @user.stripe_token %>
+                    <p>Credit card acceptance is pending.</p>
+                  <% else %>
+                    <div class="field">
+                        <%= label_tag :card_number, "Credit Card Number" %>
+                        <%= text_field_tag :card_number, nil, name: nil %> 
+                    </div>
+                    <div class="field">
+                        <%= label_tag :card_code, "Card Security Code (CVV)" %> 
+                        <%= text_field_tag :card_code, nil, name: nil %>
+                    </div>
+                    <div class="field">
+                        <%= label_tag :card_month, "Card Expiration" %>
+                        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}%> 
+                        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+10}, {name: nil, id: "card_year"}%> 
+                    </div>
+                    <div class="field">
+                        <%= f.text_field :coupon, :label => 'Promotional Coupon (if any)' %>
+                    </div>
+                <% end %>
+                <%= f.hidden_field :stripe_token %>  
+                <%= f.submit "Sign up", class: "btn btn-primary", :id=>"SaveAccount" %>
+              </div>
+          </div>
+      </div>
       <% end %>
-      
-
       <%= render "devise/shared/links" %>
-           
-           
-
-
+      </div>
     </div>
-  </div>
-</fieldset>
 </form>

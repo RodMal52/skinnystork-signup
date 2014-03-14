@@ -1,3 +1,6 @@
+<% content_for :head do %>
+<%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+<% end %>
 <div class="row">
   <div class="col-sm-6 ">
     <h1>Edit your profile</h1>
@@ -7,7 +10,7 @@
     :html => { :method => :put, role: "form" }) do |f| %>
   
       <%= devise_error_messages! %>
-
+      
       <div class="form-group">
         <%= f.label :email %>
         <div class="row">
